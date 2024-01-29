@@ -2,7 +2,7 @@
 
 This is a constantly updating template repository for creating [a native container image](https://fedoraproject.org/wiki/Changes/OstreeNativeContainerStable) designed to be customized however you want. GitHub will build your image for you, and then host it for you on [ghcr.io](https://github.com/features/packages). You then just tell your computer to boot off of that image. GitHub keeps 90 days worth image backups for you, thanks Microsoft!
 
-For more info, check out the [BlueBuild homepage](https://blue-build.org/) and the [blue-build CLI](https://github.com/blue-build/cli)
+For more info, check out the [BlueBuild homepage](https://blue-build.org/) and the [BlueBuild CLI](https://github.com/blue-build/cli)
 
 ## Getting started
 
