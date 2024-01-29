@@ -1,0 +1,58 @@
+# image will be published to ghcr.io/<user>/<name>
+name: startingpoint
+# description will be included in the image's metadata
+description: A starting point for further customization of uBlue images. Make your own! https://ublue.it/making-your-own/
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/silverblue-main
+image-version: 39 # latest is also supported if you want new updates ASAP
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - type: files
+    files:
+      - usr: /usr # copy static configurations
+                  #
+                  # copies config/files/usr into your image's /usr
+                  #
+                  # configuration you wish to end up in /etc/ on the booted system
+                  # should be added into /usr/etc/ as that is the proper "distro"
+                  # config directory on ostree. Read more in the files module's README
+
+  - type: rpm-ostree
+    repos:
+      # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
+    install:
+      # - micro
+      # - starship
+    remove:
+      - firefox # default firefox removed in favor of flatpak
+      - firefox-langpacks # langpacks needs to also be removed to prevent dependency problems
+
+  - type: default-flatpaks
+    notify: true   # Send notification after install/uninstall is finished (true/false)
+    system:
+      # If no repo information is specified, Flathub will be used by default
+      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      repo-name: flathub
+      # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
+      install:
+      # - org.gnome.Loupe
+      # - one.ablaze.floorp//lightning # This is an example of flatpak which has multiple branches in selection (flatpak//branch).
+      # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08).
+      # Only normal flatpak applications are (like Floorp Lightning web browser in this example).
+      # Multiple install of same flatpaks with different branches is not supported.
+      remove:
+      # - org.gnome.eog
+      #
+    # A flatpak repo can also be added without having to install flatpaks,
+    # as long as one of the repo- fields is present
+    user:
+      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      repo-name: flathub
+
+  - type: script
+    scripts:
+      # this sets up the proper policy & signing files for signed images to work
+      - signing.sh
