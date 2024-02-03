@@ -23,7 +23,8 @@ jobs:
           # !! Add your recipes here 
           - recipe.yml
     steps:
-      - name: Build Custom Image # the 
+       # the build is fully handled by the reusable github action
+      - name: Build Custom Image
         uses: blue-build/github-action@v1.0.0
         with:
           recipe: ${{ matrix.recipe }}
