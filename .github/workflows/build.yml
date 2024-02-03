@@ -4,10 +4,6 @@ on:
   schedule:
     - cron: "30 16 * * *"
   push:
-    branches:
-      - live
-      - template
-      - main
     paths-ignore:
       - "**.md"
   pull_request:
