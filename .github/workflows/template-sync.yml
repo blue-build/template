@@ -1,3 +1,4 @@
+name: template-sync
 on:
   schedule:
     - cron: "0 0 * * 1" # triggers on midnight on every monday
