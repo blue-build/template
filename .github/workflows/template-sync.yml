@@ -1,0 +1,17 @@
+on:
+  schedule:
+    - cron: "0 0 * * 1" # triggers on midnight on every monday
+  workflow_dispatch: # allow manual triggers
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4 # clone repo
+      - name: Sync repository with upstream template
+        uses: AndreasAugustin/actions-template-sync@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_repo_path: blue-build/template
