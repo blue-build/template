@@ -32,7 +32,10 @@ The `latest` tag will automatically point to the latest build. That build will s
 
 ## ISO
 
-This template includes a simple Github Action to build and release an ISO of your image.
+> **Warning**  
+> The ISO GitHub Action will be deprecated soon in favor of the new [ublue-os/isogenerator](https://github.com/ublue-os/isogenerator). The Action will then be removed from this template repository and instructions for building ISOs will be on the website.
+
+This template includes a simple GitHub Action to build and release an ISO of your image.
 
 To run the action, simply edit the `boot_menu.yml` by changing all the references to startingpoint to your repository. This should trigger the action automatically.
 
