@@ -25,8 +25,8 @@ modules:
     remove:
       # This is an example on how to remove RPMs properly
       # "firefox" as main package, "firefox-langpacks" as a dependency
-      # not all packages need specific removal of a dependency,
-      # as that is usually handled automatically, this is just a rare case where that's needed.
+      # not all packages need specific removal of a dependency, as that is usually handled automatically
+      # this is just a rare case where that's needed.
       #
       # - firefox
       # - firefox-langpacks
