@@ -23,13 +23,10 @@ modules:
       # - micro
       # - starship
     remove:
-      # This is an example on how to remove RPMs properly
-      # "firefox" as main package, "firefox-langpacks" as a dependency
-      # not all packages need specific removal of a dependency, as that is usually handled automatically
-      # this is just a rare case where that's needed.
-      #
+      # example: removing firefox (in favor of the flatpak)
+      # "firefox" is the main package, "firefox-langpacks" is a dependency
       # - firefox
-      # - firefox-langpacks
+      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
