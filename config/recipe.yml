@@ -24,12 +24,12 @@ modules:
       # - starship
       - powertop
       - fuzzel
-      - yadm
       - wl-clipboard
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
       - firefox
+      - firefox-langpacks
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
