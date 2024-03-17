@@ -32,16 +32,7 @@ The `latest` tag will automatically point to the latest build. That build will s
 
 ## ISO
 
-> **Warning**  
-> The ISO GitHub Action will be deprecated soon in favor of the new [ublue-os/isogenerator](https://github.com/ublue-os/isogenerator). The Action will then be removed from this template repository and instructions for building ISOs will be on the website.
-
-This template includes a simple GitHub Action to build and release an ISO of your image.
-
-To run the action, simply edit the `boot_menu.yml` by changing all the references to startingpoint to your repository. This should trigger the action automatically.
-
-The Action currently uses [ublue-os/isogenerator-old](https://github.com/ublue-os/isogenerator-old) and works in a similar manner to the official Universal Blue ISO. If you have any issues, you should first check [the documentation page on installation](https://universal-blue.org/installation/). The ISO is a netinstaller and should always pull the latest version of your image.
-
-Note that this release-iso action is not a replacement for a full-blown release automation like [release-please](https://github.com/googleapis/release-please).
+If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
 
 ## Verification
 
