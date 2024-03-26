@@ -15,7 +15,9 @@ modules:
       - usr: /usr # copies config/files/usr into your image's /usr.
                   # put configuration files you want in /etc/ on a booted system 
                   # in /usr/etc/ in the image. read more in files module reference.
-
+  - type: script
+    snippets: 
+      - "curl -sL -o /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:erikreider:SwayNotificationCenter.repo https://copr.fedorainfracloud.org/coprs/erikreider/SwayNotificationCenter/repo/fedora-$(rpm -E %fedora)/erikreider-SwayNotificationCenter-fedora-$(rpm -E %fedora).repo"
   - type: rpm-ostree
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
@@ -26,6 +28,7 @@ modules:
       - fuzzel
       - wl-clipboard
       - mako
+      - SwayNotificationCenter
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
