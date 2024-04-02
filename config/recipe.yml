@@ -28,6 +28,7 @@ modules:
       - fuzzel
       - wl-clipboard
       - mako
+      - wlogout
       - SwayNotificationCenter
     remove:
       # example: removing firefox (in favor of the flatpak)
