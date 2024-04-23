@@ -28,12 +28,10 @@ modules:
       - fuzzel
       - wl-clipboard
       - mako
-      - wlogout
       - SwayNotificationCenter
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
-      - rofi
       - firefox
       - dunst
       - firefox-langpacks
