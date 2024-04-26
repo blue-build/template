@@ -24,6 +24,7 @@ modules:
     install:
       # - micro
       # - starship
+      - wlogout
       - powertop
       - fuzzel
       - wl-clipboard
