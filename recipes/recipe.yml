@@ -1,21 +1,15 @@
----
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
-name: template
-# description will be included in the image's metadata
+name: my-aurora
 description: This is my personal OS image.
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/aurora-dx-nvidia-open
+image-version: latest
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
   - type: files
     files:
       - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+        destination: /
 
   - type: dnf
     repos:
@@ -25,21 +19,76 @@ modules:
       packages:
         - micro
         - starship
+        - pv
+        - virt-manager
+        - gparted
+        - @virtualization # Forces KVM/QEMU suppor
     remove:
       packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
+        - firefox-langpacks
+        
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: true
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
+        install:
           - org.mozilla.firefox
           - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+          - com.jeffser.Alpaca
+          - org.blender.Blender
+          - com.bambulab.BambuStudio
+          - org.freecadweb.FreeCAD
+          - org.gimp.GIMP
+          - org.videolan.VLC
+          - org.jupyter.JupyterLab
+          - io.github.shiftey.Desktop
+          - org.openscad.OpenSCAD
+          - com.wings3d.WINGS
+          # --- The Aurora DX Default Apps (Automated!) ---
+          - com.visualstudio.code
+          - io.podman_desktop.PodmanDesktop
+          - com.raggesilver.BlackBox
+          - org.gnome.Boxes
+          - com.github.tchx84.Flatseal
+          - org.gnome.Ptyxis
+      - scope: user
+         # THE MEGA HOMEBREW LIST (Q1 & Q2)
+  - type: homebrew
+    install:
+      # --- Core Navigation & Shell Tools ---
+      - uv
+      - ripgrep
+      - bat
+      - eza
+      - fzf       # Fuzzy finder (Crucial for CLI workflow)
+      - zoxide    # Smarter 'cd' command
+      - walk      # Directory navigator
+      - syft      # Container scanning
+      - yq        # YAML processor
+      # --- The Bluefin/Aurora AI Suite ---
+      - aichat
+      - block-goose-cli
+      - gemini-cli
+      - mods
+      - ramalama
+      - llm
+      - qwen-code
+      - whisper-cpp
+      - clio
+      - codex
+      - crush
+      - opencode
+      - qwen-code
+      - whisper-cpp
 
+  # This module turns on the services automatically!
+  - type: systemd
+    system:
+      enabled:
+        - docker.service
+        - podman.socket
+        - libvirtd.service
+        - ramalama.service
+        
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
